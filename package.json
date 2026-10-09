@@ -1,0 +1,42 @@
+{
+  "name": "homebridge-wiz-resilient",
+  "version": "0.1.0",
+  "description": "Homebridge plugin for WiZ lights and plugs over the local network, with fast recovery after power cycles and IP changes",
+  "type": "module",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "config.schema.json"
+  ],
+  "keywords": [
+    "homebridge-plugin",
+    "wiz",
+    "lan"
+  ],
+  "license": "Apache-2.0",
+  "private": true,
+  "engines": {
+    "node": "^20.7.0 || ^22 || ^24",
+    "homebridge": "^1.8.0 || ^2.0.0"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": {
+    "homebridge": "^1.8.0 || ^2.0.0"
+  },
+  "dependencies": {
+    "effect": "^4.0.2"
+  },
+  "devDependencies": {
+    "@effect/vitest": "^4.0.2",
+    "@types/node": "^22.20.5",
+    "homebridge": "^1.9.0",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.3"
+  }
+}

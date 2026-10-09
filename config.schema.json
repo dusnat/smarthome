@@ -1,0 +1,111 @@
+{
+  "pluginAlias": "WizSmarthome",
+  "pluginType": "platform",
+  "singular": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "Dusnat's Big Perfect Smart Home",
+        "description": "Shown as the prefix on this plugin's log lines and as its title in the Homebridge UI."
+      },
+      "port": {
+        "title": "Port",
+        "type": "integer",
+        "description": "[Optional] UDP port this plugin listens on. Devices also announce themselves on this port when they power up, so keep the default unless something else uses it.",
+        "placeholder": 38900,
+        "minimum": 0
+      },
+      "enableScenes": {
+        "title": "Enable Scenes",
+        "type": "boolean",
+        "description": "[Optional] Turn on support for scenes with your lightbulbs. THIS WILL MAKE IT IMPOSSIBLE TO GROUP LIGHTS",
+        "default": false
+      },
+      "lastStatus": {
+        "title": "Last Status",
+        "type": "boolean",
+        "description": "[Optional] Lights will remember the last mode used when turned on (light settings in HomeKit will be ignored).",
+        "default": false
+      },
+      "broadcast": {
+        "title": "Broadcast Address",
+        "type": "string",
+        "format": "ipv4",
+        "description": "[Optional] UDP Broadcast address for device discovery."
+      },
+      "address": {
+        "title": "Server Address",
+        "type": "string",
+        "format": "ipv4",
+        "description": "[Optional] This server's IP address, sent in discovery requests. Autodetected when empty. The plugin always listens on all interfaces."
+      },
+      "refreshInterval": {
+        "title": "Refresh Interval (seconds)",
+        "type": "integer",
+        "default": 30,
+        "minimum": 0,
+        "description": "[Optional] Seconds between background state checks of each device. Detects devices that went offline and keeps HomeKit in sync with changes made elsewhere. 0 = off. Default: 30."
+      },
+      "discoveryInterval": {
+        "title": "Discovery Interval (seconds)",
+        "type": "integer",
+        "default": 60,
+        "minimum": 0,
+        "description": "[Optional] Seconds between discovery broadcasts (minimum 10). Devices that power up are also picked up immediately from their own announcement, so this is a fallback. 0 = startup only. Default: 60."
+      },
+      "pingFailuresBeforeOffline": {
+        "title": "Ping Failures Before Offline",
+        "type": "integer",
+        "default": 3,
+        "minimum": 1,
+        "description": "[Optional] Consecutive failed exchanges before a device shows as 'No Response'. It recovers automatically as soon as it answers or announces itself. Default: 3."
+      },
+      "devices": {
+        "title": "Devices",
+        "type": "array",
+        "description": "[Optional] Devices to name, or to reach directly by IP when broadcast does not reach them. Match by IP or MAC.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "host": {
+              "title": "Device IP",
+              "type": "string",
+              "format": "ipv4"
+            },
+            "name": {
+              "title": "Device Name",
+              "type": "string"
+            },
+            "mac": {
+              "title": "Device MAC",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ignoredDevices": {
+        "title": "Ignored Devices",
+        "type": "array",
+        "description": "[Optional] Devices to leave out of HomeKit. Match by IP or MAC. Already-added ones are removed on the next start.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "host": {
+              "title": "Device IP",
+              "type": "string",
+              "format": "ipv4"
+            },
+            "mac": {
+              "title": "Device MAC",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "headerDisplay": "Dusnat's Big Perfect Smart Home"
+}
