@@ -90,5 +90,8 @@ Layout:
   per device (`DeviceWorker`), and discovery. No Homebridge imports.
 - `src/homebridge/`: the platform class, HomeKit service bindings, and logging
 
-Color conversion and the scene table are adapted from homebridge-wiz-lan
-(Apache-2.0).
+## License
+
+MIT (see `LICENSE`). The color conversion (`src/protocol/color.ts`) and scene
+table (`src/protocol/scenes.ts`) are adapted from homebridge-wiz-lan and remain
+under the Apache License 2.0; see `THIRD_PARTY_NOTICES.md`.

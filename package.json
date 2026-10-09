@@ -6,14 +6,16 @@
   "main": "dist/index.js",
   "files": [
     "dist",
-    "config.schema.json"
+    "config.schema.json",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
   ],
   "keywords": [
     "homebridge-plugin",
     "wiz",
     "lan"
   ],
-  "license": "Apache-2.0",
+  "license": "MIT",
   "private": true,
   "engines": {
     "node": "^20.7.0 || ^22 || ^24",

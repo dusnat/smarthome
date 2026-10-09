@@ -1,6 +1,10 @@
 /**
  * WiZ built-in scenes, indexed by sceneId, with the device families that
- * support each one. Table from homebridge-wiz-lan (Apache-2.0).
+ * support each one.
+ *
+ * The scene table is derived from homebridge-wiz-lan, Copyright Kevin Pei and
+ * the homebridge-wiz-lan contributors, licensed under the Apache License 2.0
+ * (see THIRD_PARTY_NOTICES.md). Modified: lookup helpers are new.
  */
 type Family = "RGB" | "TW" | "DW"
 

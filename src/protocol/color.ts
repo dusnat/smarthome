@@ -1,7 +1,12 @@
 /**
  * Color conversions between HomeKit (hue/saturation, mireds) and WiZ
- * (r/g/b, kelvin). Ported from homebridge-wiz-lan (Apache-2.0), which in turn
- * credits neilbartlett/color-temperature and mjackson's HSV gist.
+ * (r/g/b, kelvin).
+ *
+ * Derived from homebridge-wiz-lan's src/util/color.ts, Copyright Kevin Pei and
+ * the homebridge-wiz-lan contributors, licensed under the Apache License 2.0
+ * (see THIRD_PARTY_NOTICES.md). Modified: rewritten as pure functions, logging
+ * dependency removed. The original credits neilbartlett/color-temperature and
+ * mjackson's HSV gist.
  */
 
 export type RGB = { readonly r: number; readonly g: number; readonly b: number }
