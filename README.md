@@ -62,9 +62,10 @@ The order matters: if Homebridge starts while neither plugin is installed, it
 deletes the orphaned accessories and the HomeKit setup goes with them. If both
 are installed, the platform name clashes.
 
-Installs come straight from a tagged release on GitHub; npm clones the tag,
-builds it (the `prepare` script) and installs a normal copy. Use the `npm` of
-the Node install that runs Homebridge.
+Each GitHub release carries the built package as an asset
+(`homebridge-wiz-resilient-<version>.tgz`), so the Homebridge machine installs
+a normal, versioned copy and builds nothing. Use the `npm` of the Node install
+that runs Homebridge.
 
 1. Turn off anything that restarts Homebridge on a timer.
 2. Back up the Homebridge storage directory (at least `config.json`,
@@ -73,7 +74,7 @@ the Node install that runs Homebridge.
 
    ```sh
    npm uninstall -g homebridge-wiz-lan
-   npm install -g github:dusnat/smarthome#v0.1.0
+   npm install -g https://github.com/dusnat/smarthome/releases/download/v0.1.0/homebridge-wiz-resilient-0.1.0.tgz
    ```
 
 4. Restart Homebridge (UI Restart button, or `sudo hb-service restart`). The
@@ -82,13 +83,22 @@ the Node install that runs Homebridge.
 5. Optionally, in the UI's plugin settings, set a display name and remove an
    inherited `refreshInterval: 0` so background polling is on.
 
-To update, install a newer tag the same way and restart. To roll back, install
-an older tag, or `homebridge-wiz-lan@3.3.3` and the backed-up `config.json`.
+To update, install a newer release's tarball the same way and restart. To
+roll back, install an older release's tarball, or `homebridge-wiz-lan@3.3.3`
+and the backed-up `config.json`.
+
+(Installing straight from git, `github:dusnat/smarthome#tag`, does not work for
+global installs: npm builds git dependencies without their dev tools.)
 
 ## Releasing
 
-Bump `version` in `package.json`, commit, then tag `v<version>` and push the
-tag (`gh release create v<version>` does both the tag and a release).
+Bump `version` in `package.json` and commit, then build the tarball and
+publish it with a release (this creates the tag too):
+
+```sh
+npm pack
+gh release create v<version> homebridge-wiz-resilient-<version>.tgz
+```
 
 ## Development
 
