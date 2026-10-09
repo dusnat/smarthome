@@ -62,17 +62,33 @@ The order matters: if Homebridge starts while neither plugin is installed, it
 deletes the orphaned accessories and the HomeKit setup goes with them. If both
 are installed, the platform name clashes.
 
+Installs come straight from a tagged release on GitHub; npm clones the tag,
+builds it (the `prepare` script) and installs a normal copy. Use the `npm` of
+the Node install that runs Homebridge.
+
 1. Turn off anything that restarts Homebridge on a timer.
-2. Back up the Homebridge storage directory (at least `accessories/` and
-   `persist/`).
-3. On this machine: `npm pack`. This builds the plugin and creates
-   `homebridge-wiz-resilient-<version>.tgz`.
-4. Stop Homebridge (`hb-service stop`).
-5. In the directory Homebridge loads plugins from: `npm uninstall homebridge-wiz-lan`,
-   then `npm install /path/to/homebridge-wiz-resilient-<version>.tgz`.
-6. Start Homebridge (`hb-service start`). The log should say the plugin name
-   changed from `homebridge-wiz-lan` to `homebridge-wiz-resilient` for each
-   accessory, then `Restored N accessories from cache`.
+2. Back up the Homebridge storage directory (at least `config.json`,
+   `accessories/` and `persist/`).
+3. Swap the plugins back to back, while Homebridge is still running:
+
+   ```sh
+   npm uninstall -g homebridge-wiz-lan
+   npm install -g github:dusnat/smarthome#v0.1.0
+   ```
+
+4. Restart Homebridge (UI Restart button, or `sudo hb-service restart`). The
+   log should say the plugin name changed from `homebridge-wiz-lan` to
+   `homebridge-wiz-resilient` for each accessory.
+5. Optionally, in the UI's plugin settings, set a display name and remove an
+   inherited `refreshInterval: 0` so background polling is on.
+
+To update, install a newer tag the same way and restart. To roll back, install
+an older tag, or `homebridge-wiz-lan@3.3.3` and the backed-up `config.json`.
+
+## Releasing
+
+Bump `version` in `package.json`, commit, then tag `v<version>` and push the
+tag (`gh release create v<version>` does both the tag and a release).
 
 ## Development
 
